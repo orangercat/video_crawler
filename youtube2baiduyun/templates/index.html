@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h1>youtube批量下载云应用</h1>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% elif message.tags == 'error' %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form action="" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+        {% csrf_token %}
+        <div class="col-md-4">
+            <input class="btn btn-default" type="file" name="urls_file" value=""/>
+        </div>
+        <div class="col-md-8">
+            <input class="btn btn-default" type="submit" value="提交"/>
+        </div>
+    </form>
+
+</div>
+<nav id="myScrollspy" class="navbar navbar-default navbar-static" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">使用说明</a>
+    </div>
+</nav>
+<div data-spy="scroll" data-offset="0"
+     style="height:200px;overflow:auto; position: relative;">
+    <div class="section">
+        <p>-------------- 下载链接写入文本中，点击选择上传文件后提交，如果成功运行会有文本框提示————————————————</p>
+    </div>
+</div>
+</body>
+</html>

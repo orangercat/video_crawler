@@ -25,7 +25,7 @@ def index(req):
             url = line.decode(encoding='UTF-8')
             # line = line.strip('\n')
 
-            print(line)
+            #print(line)
 
             # with open(urls_file, 'rt') as file:
             #

@@ -52,7 +52,7 @@ def index(req):
         by = bypy.ByPy()
 
         # local test
-        if sys.platform == 'darwin' == 'darwin':
+        if sys.platform == 'darwin':
             a = by.syncup('/Users/chaochen/Dropbox/project/env_Django_Demo/video_crawler/download', '/')
             messages.success(req, 'syn down start to delete download file')
 
@@ -63,7 +63,7 @@ def index(req):
 
         # for server
         elif sys.platform == 'linux':
-            os.system('bypy syncup -v /home/video_crawler/download /')
+            os.system('bypy -v syncup /home/video_crawler/download/ /')
             #a = by.syncup('/home/youtube_crawler/download', '/')
             messages.success(req, 'syn down start to delete download file')
 

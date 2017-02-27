@@ -63,8 +63,8 @@ def index(req):
 
         # for server
         elif sys.platform == 'linux':
-
-            a = by.syncup('/home/youtube_crawler/download', '/')
+            os.system('bypy -v /home/youtube_crawler/download /')
+            #a = by.syncup('/home/youtube_crawler/download', '/')
             messages.success(req, 'syn down start to delete download file')
 
             os.system('rm -rf /home/youtube_crawler/download/*')

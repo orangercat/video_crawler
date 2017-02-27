@@ -63,11 +63,11 @@ def index(req):
 
         # for server
         elif sys.platform == 'linux':
-            os.system('bypy sycup -v /home/youtube_crawler/download /')
+            os.system('bypy syncup -v /home/video_crawler/download /')
             #a = by.syncup('/home/youtube_crawler/download', '/')
             messages.success(req, 'syn down start to delete download file')
 
-            os.system('rm -rf /home/youtube_crawler/download/*')
+            os.system('rm -rf /home/video_crawler/download/*')
             messages.success(req, 'action down!plz check baiduyun')
 
         return render(req, 'index.html')

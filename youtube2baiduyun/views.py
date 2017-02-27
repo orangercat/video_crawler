@@ -32,7 +32,7 @@ def index(req):
             #     print(file)
             ydl_opts = {
                 ##Download best format available but not better that 480p
-                'format': 'bestvideo[height<=720]+worstaudio[ext=m4a]/best[height<=720][ext=mp4]',
+                'format': 'bestvideo[height<=720]+worstaudio[ext=m4a]/best[height<=720][ext=mp4]/best',
                 'merge_output_format': 'mp4',
                 'outtmpl': './download/%(title)s.%(ext)s',
                 #'simulate': 'True',
@@ -50,22 +50,27 @@ def index(req):
         messages.success(req, 'start to syn to baiduyun.')
 
         by = bypy.ByPy()
+        baiduyun_syn = 'False'
+            #local test
+        if baiduyun_syn == 'False':
+            return render(req, 'index.html')
 
-        #local test
-        if sys.platform == 'darwin':
-            a = by.syncup('/Users/chaochen/Dropbox/project/env_Django_Demo/youtube_crawler/download', '/')
-            messages.success(req, 'syn down start to delete download file')
+        elif baiduyun_syn == 'True':
+            if sys.platform == 'darwin':
+                a = by.syncup('/Users/chaochen/Dropbox/project/env_Django_Demo/video_crawler/download', '/')
+                messages.success(req, 'syn down start to delete download file')
 
-            os.system('rm -rf /Users/chaochen/Dropbox/project/env_Django_Demo/youtube_crawler/download/*')
-            messages.success(req, 'action down!plz check baiduyun')
+                os.system('rm -rf /Users/chaochen/Dropbox/project/env_Django_Demo/video_crawler/download/*')
+                messages.success(req, 'action down!plz check baiduyun')
 
-        #for server
-        elif sys.platform == 'linux':
+            #for server
+            elif sys.platform == 'linux':
 
-            a = by.syncup('/home/youtube_crawler/download', '/')
-            messages.success(req, 'syn down start to delete download file')
+                a = by.syncup('/home/youtube_crawler/download', '/')
+                messages.success(req, 'syn down start to delete download file')
 
-            os.system('rm -rf /home/youtube_crawler/download/*')
-            messages.success(req, 'action down!plz check baiduyun')
+                os.system('rm -rf /home/youtube_crawler/download/*')
+                messages.success(req, 'action down!plz check baiduyun')
 
+            return render(req, 'index.html')
     return render(req, 'index.html')

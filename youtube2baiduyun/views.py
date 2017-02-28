@@ -31,8 +31,8 @@ def index(req):
             #
             #     print(file)
             ydl_opts = {
-                ##Download best format available but not better that 480p
-                'format': 'bestvideo[height<=720]+worstaudio[ext=m4a]/best[height<=720][ext=mp4]/best',
+                ##Download best format available but not better that 720p
+                'format': 'best[height<=720][ext=mp4]/bestvideo[height<=720][ext=mp4]+worstaudio[ext=m4a]/best',
                 'merge_output_format': 'mp4',
                 'outtmpl': './download/%(title)s.%(ext)s',
                 # 'simulate': 'True',

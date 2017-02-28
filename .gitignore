@@ -1,3 +1,4 @@
 .DS_Store
-/download/
-/__pycache__/
+download/
+__pycache__/
+download.txt

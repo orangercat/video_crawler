@@ -5,6 +5,7 @@ from django.contrib import messages
 import youtube_dl
 import os, sys
 import bypy
+import subprocess
 
 
 # online video downloader module
@@ -34,19 +35,19 @@ def string_ydl(file):
 def syn_baiduyun(request):
     # local test
     if sys.platform == 'darwin':
-        os.system('bypy -v syncup /Users/chaochen/Dropbox/project/env_Django_Demo/video_crawler/download/ /')
+        subprocess.call("bypy -v syncup /Users/chaochen/Dropbox/project/env_Django_Demo/video_crawler/download/ /",
+                        shell=True)
         messages.success(request, 'syn down start to delete download file')
 
-        os.system('rm -rf /Users/chaochen/Dropbox/project/env_Django_Demo/video_crawler/download/*')
+        subprocess.call("rm -rf /Users/chaochen/Dropbox/project/env_Django_Demo/video_crawler/download/*", shell=True)
         messages.success(request, 'action down!plz check baiduyun')
 
     # for server
     elif sys.platform == 'linux':
-        os.system('bypy -v -r 10 syncup /home/video_crawler/download/ /')
-        # a = by.syncup('/home/youtube_crawler/download', '/')
+        subprocess.call("bypy -v syncup /home/video_crawler/download/ /", shell=True)
         messages.success(request, 'syn down start to delete download file')
 
-        os.system('rm -rf /home/video_crawler/download/*')
+        subprocess.call("rm -rf /home/video_crawler/download/*", shell=True)
         messages.success(request, 'action down!plz check baiduyun')
 
 
@@ -63,8 +64,10 @@ def index(req):
 
         string_ydl(uploadfile)
 
+        messages.success(req, 'youtube download finished.')
+
         messages.success(req, 'start to syn to baiduyun.')
 
-        #syn_baiduyun(req)
+        syn_baiduyun(req)
 
     return render(req, 'index.html')

@@ -6,9 +6,8 @@ import youtube_dl
 import sys
 import subprocess
 
+
 # syn to baiduyun module
-
-
 def syn_baiduyun(request):
     # local test
     if sys.platform == 'darwin':
@@ -31,28 +30,28 @@ def syn_baiduyun(request):
 
 
 # online video downloader module
-def string_ydl(file, request):
-    for line in file:
-        # print(url)
-        url = line.decode(encoding='UTF-8')
-        ydl_opts = {
-            # Download best format available but not better that 720p
-            'format': 'best[height<=720][ext=mp4]/bestvideo[height<=720][ext=mp4]+worstaudio[ext=m4a]/best',
-            'merge_output_format': 'mp4',
-            'outtmpl': './download/%(title)s.%(ext)s',
-            # 'simulate': 'True',
-            #     # 'postprocessors': [{
-            #     #    'key': 'FFmpegExtractAudio',
-            #     #    'preferredcodec': 'mp3',
-            #     #    'preferredquality': '192',
-            #     # }],
-            #     # 'logger': MyLogger(),
-            #     #'progress_hooks': [my_hook],
-        }
-        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([url])
-        messages.success(request, 'youtube %(title)s download finished.')
-        syn_baiduyun(request)
+# def string_ydl(file, request):
+#     for line in file:
+#         # print(url)
+#         url = line.decode(encoding='UTF-8')
+#         ydl_opts = {
+#             # Download best format available but not better that 720p
+#             'format': 'best[height<=720][ext=mp4]/bestvideo[height<=720][ext=mp4]+worstaudio[ext=m4a]/best',
+#             'merge_output_format': 'mp4',
+#             'outtmpl': './download/%(title)s.%(ext)s',
+#             # 'simulate': 'True',
+#             #     # 'postprocessors': [{
+#             #     #    'key': 'FFmpegExtractAudio',
+#             #     #    'preferredcodec': 'mp3',
+#             #     #    'preferredquality': '192',
+#             #     # }],
+#             #     # 'logger': MyLogger(),
+#             #     #'progress_hooks': [my_hook],
+#         }
+#         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+#             ydl.download([url])
+#         messages.success(request, 'youtube %(title)s download finished.')
+#         syn_baiduyun(request)
 
 
 @csrf_protect
@@ -66,7 +65,32 @@ def index(req):
             messages.error(req, 'error no file upload')
             return render(req, 'index.html')
 
-        string_ydl(uploadfile, req)
+        for line in uploadfile:
+            # print(url)
+            url = line.decode(encoding='UTF-8')
+            ydl_opts = {
+                # Download best format available but not better that 720p
+                'format': 'best[height<=720][ext=mp4]/bestvideo[height<=720][ext=mp4]+worstaudio[ext=m4a]/best',
+                'merge_output_format': 'mp4',
+                'outtmpl': './download/%(title)s.%(ext)s',
+                # 'simulate': 'True',
+                #     # 'postprocessors': [{
+                #     #    'key': 'FFmpegExtractAudio',
+                #     #    'preferredcodec': 'mp3',
+                #     #    'preferredquality': '192',
+                #     # }],
+                #     # 'logger': MyLogger(),
+                #     #'progress_hooks': [my_hook],
+            }
+
+            with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([url])
+
+            messages.success(req, 'youtube %(title)s download finished.')
+
+            syn_baiduyun(req)
+
+        # string_ydl(uploadfile, req)
 
         # messages.success(req, 'start to syn to baiduyun.')
 

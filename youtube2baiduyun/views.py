@@ -39,7 +39,7 @@ def url_dl(url, request):
         'merge_output_format': 'mp4',
         'outtmpl': './download/%(id)s.%(ext)s',
         'ignoreerrors': True,
-        # 'nooverwrites' : 'false'
+        'nooverwrites': True,
         # 'simulate': 'true',
         #     # 'postprocessors': [{
         #     #    'key': 'FFmpegExtractAudio',

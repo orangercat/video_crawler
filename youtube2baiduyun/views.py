@@ -37,7 +37,7 @@ def url_dl(url, request):
         # Download best format available but not better that 720p
         'format': 'best[height<=720][ext=mp4]/bestvideo[height<=720][ext=mp4]+worstaudio[ext=m4a]/best',
         'merge_output_format': 'mp4',
-        'outtmpl': './download/%(title)s.%(ext)s',
+        'outtmpl': './download/%(id)s.%(ext)s',
         'ignoreerrors': True,
         # 'nooverwrites' : 'false'
         # 'simulate': 'true',

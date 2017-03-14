@@ -14,21 +14,21 @@ def syn_baiduyun(request):
         subprocess.call(
             "bypy -v syncup /Users/chaochen/Dropbox/project/env_Django_Demo/video_crawler/download/ /",
             shell=True)
-        messages.success(request, 'syn down start to delete download file')
+        # messages.success(request, 'syn down start to delete download file')
 
         subprocess.call(
             "rm -rf /Users/chaochen/Dropbox/project/env_Django_Demo/video_crawler/download/*",
             shell=True)
-        messages.success(request, 'action down!plz check baiduyun')
+        # messages.success(request, 'action down!plz check baiduyun')
 
     # for server
     elif sys.platform == 'linux':
         subprocess.call(
             "bypy -v syncup /home/video_crawler/download/ /", shell=True)
-        messages.success(request, 'syn down start to delete download file')
+        # messages.success(request, 'syn down start to delete download file')
 
         subprocess.call("rm -rf /home/video_crawler/download/*", shell=True)
-        messages.success(request, 'action down!plz check baiduyun')
+        # messages.success(request, 'action down!plz check baiduyun')
 
 
 # online video downloader module
@@ -73,8 +73,8 @@ def index(req):
 
             url_dl(url, req)
 
-            syn_baiduyun(req)
+        syn_baiduyun(req)
 
-            # messages.success(req, 'start to syn to baiduyun.')
+        messages.success(req, 'finished check baidu yun.')
 
     return render(req, 'index.html')

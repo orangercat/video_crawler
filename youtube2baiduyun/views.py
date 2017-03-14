@@ -86,14 +86,19 @@ def index(req):
 
 def main():
     with open('../download.txt', 'r') as f:
+        i = 0
         for line in f:
             # line = line.decode(encoding='UTF-8')
 
             url_dl(line)
 
-            # syn_baiduyun()
+            syn_baiduyun()
+
+            i += 1
 
         return
+
+        print('%s file(s) download', i)
 
 
 if __name__ == "__main__":

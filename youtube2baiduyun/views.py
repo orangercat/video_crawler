@@ -73,7 +73,7 @@ def index(req):
 
             url_dl(url, req)
 
-        syn_baiduyun(req)
+            syn_baiduyun(req)
 
         messages.success(req, 'finished check baidu yun.')
 

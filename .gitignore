@@ -1,6 +1,5 @@
 .DS_Store
 download/
 __pycache__/
-download.txt
 uwsgi.log
 *.json

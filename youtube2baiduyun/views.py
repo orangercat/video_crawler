@@ -8,7 +8,7 @@ import subprocess
 
 
 # syn to baiduyun module
-def syn_baiduyun(request):
+def syn_baiduyun():
     # local test
     if sys.platform == 'darwin':
         subprocess.call(
@@ -32,7 +32,7 @@ def syn_baiduyun(request):
 
 
 # online video downloader module
-def url_dl(url, request):
+def url_dl(url):
     ydl_opts = {
         # Download best format available but not better that 720p
         'format': 'best[height<=720][ext=mp4]/bestvideo[height<=720][ext=mp4]+worstaudio[ext=m4a]/best',
@@ -53,7 +53,7 @@ def url_dl(url, request):
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
 
-        messages.success(request, 'youtube download finished.')
+        # messages.success(request, 'youtube download finished.')
 
 
 @csrf_protect
@@ -67,14 +67,34 @@ def index(req):
             messages.error(req, 'error no file upload')
             return render(req, 'index.html')
 
+        i = 0
+
         for line in uploadfile:
             # print(url)
             url = line.decode(encoding='UTF-8')
 
-            url_dl(url, req)
+            url_dl(url)
 
-            syn_baiduyun(req)
+            syn_baiduyun()
 
-        messages.success(req, 'finished check baidu yun.')
+            i += 1
+
+        messages.success(req, 'finished check baidu yun. download %s file(s)', i)
 
     return render(req, 'index.html')
+
+
+def main():
+    with open('../download.txt', 'r') as f:
+        for line in f:
+            # line = line.decode(encoding='UTF-8')
+
+            url_dl(line)
+
+            # syn_baiduyun()
+
+        return
+
+
+if __name__ == "__main__":
+    main()

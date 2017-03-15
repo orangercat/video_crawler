@@ -67,18 +67,16 @@ def index(req):
             messages.error(req, 'error no file upload')
             return render(req, 'index.html')
 
-        i = 0
-
-        for line in uploadfile:
+        for i, line in enumerate(uploadfile):
             # print(url)
             url = line.decode(encoding='UTF-8')
 
             url_dl(url)
 
-            syn_baiduyun()
-
-            i += 1
-
+            if i == 100:
+                syn_baiduyun()
+            else:
+                pass
         messages.success(req, 'finished check baidu yun. download %s file(s)', i)
 
     return render(req, 'index.html')
@@ -86,16 +84,14 @@ def index(req):
 
 def main():
     with open('./download.txt', 'r') as f:
-        i = 0
-        for line in f:
+        for i, line in enumerate(f):
             # line = line.decode(encoding='UTF-8')
 
             url_dl(line)
-
-            syn_baiduyun()
-
-            i += 1
-
+            if i == 100:
+                syn_baiduyun()
+            else:
+                pass
         return
 
         print('%s file(s) download', i)

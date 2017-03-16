@@ -5,9 +5,11 @@ from django.contrib import messages
 import youtube_dl
 import sys
 import subprocess
-
+import os
 
 # syn to baiduyun module
+
+
 def syn_baiduyun():
     # local test
     if sys.platform == 'darwin':
@@ -73,28 +75,36 @@ def index(req):
 
             url_dl(url)
 
-            if i == 100:
-                syn_baiduyun()
-            else:
-                pass
+        syn_baiduyun()
+
         messages.success(req, 'finished check baidu yun. download %s file(s)', i)
 
     return render(req, 'index.html')
 
 
 def main():
+    # if sys.platform == 'darwin':
+    #     download_path = "/Users/chaochen/Dropbox/project/env_Django_Demo/video_crawler/download"
+    # elif sys.platform == 'linux':
+    #     download_path = "/home/video_crawler/download"
     with open('./download.txt', 'r') as f:
         for i, line in enumerate(f):
             # line = line.decode(encoding='UTF-8')
 
             url_dl(line)
-            if i == 100:
-                syn_baiduyun()
-            else:
-                pass
-        return
+        #     if i == 100:
+        #         syn_baiduyun()
+        #     else:
+        #         pass
+
+        # if not os.listdir(download_path):
+        #     pass
+        # else:
+        #     syn_baiduyun()
 
         print('%s file(s) download', i)
+
+        return
 
 
 if __name__ == "__main__":

@@ -5,7 +5,6 @@ from django.contrib import messages
 import youtube_dl
 import sys
 import subprocess
-import os
 
 # syn to baiduyun module
 
@@ -75,7 +74,7 @@ def index(req):
 
             url_dl(url)
 
-        syn_baiduyun()
+        # syn_baiduyun()
 
         messages.success(req, 'finished check baidu yun. download %s file(s)', i)
 
@@ -102,7 +101,7 @@ def main():
         # else:
         #     syn_baiduyun()
 
-        print('%s file(s) download', i)
+        print(i + 'file(s) download')
 
         return
 
